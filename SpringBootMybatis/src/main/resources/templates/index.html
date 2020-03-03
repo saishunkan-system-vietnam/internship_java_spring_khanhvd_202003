@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Welcome Mybatis</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Branch</th>
+				<th>Percentage</th>
+				<th>Phone</th>
+				<th>Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="student : ${students}">
+				<td th:utext="${student.id}"></td>
+				<td th:utext="${student.name}"></td>
+				<td th:utext="${student.branch}"></td>
+				<td th:utext="${student.percentage}"></td>
+				<td th:utext="${student.phone}"></td>
+				<td th:utext="${student.email}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
