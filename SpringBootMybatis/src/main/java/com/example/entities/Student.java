@@ -1,11 +1,16 @@
 package com.example.entities;
-
+import javax.validation.*;
+import javax.validation.constraints.*;
 public class Student {
 	private int id;
+	//@Column(nullable = false)
+    @NotNull
+    @NotEmpty
+    @Size(min = 3, max = 150)
 	private String name;
 	private String branch;
 	private int percentage;
-	private int phone;
+	private String phone;
 	private String email;
 	public int getId() {
 		return id;
@@ -25,10 +30,10 @@ public class Student {
 	public void setPercentage(int percentage) {
 		this.percentage = percentage;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getEmail() {
@@ -43,4 +48,5 @@ public class Student {
 	public void setBranch(String branch) {
 		this.branch = branch;
 	}
+
 }

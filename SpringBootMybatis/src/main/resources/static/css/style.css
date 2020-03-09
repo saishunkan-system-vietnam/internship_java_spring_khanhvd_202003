@@ -1,0 +1,31 @@
+.main-content {
+	min-height: 500px;
+	max-width: 700px;
+	margin-top: 70px;
+}
+
+.index {
+	max-width: 800px;
+}
+
+.addStudent {
+	max-width: 450px;
+}
+
+.editStudent {
+	max-width: 450px;
+}
+
+.row1 {
+	margin-top: 30px;
+	max-width: 500px;
+}
+.row {
+	margin-left: 500px;
+	margin-top: 30px;
+	max-width: 500px;
+}
+
+.table th, td {
+   text-align: center;   
+}

@@ -1,32 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="head">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Welcome Spring Boot</title>
+<link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+    rel="stylesheet" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}"
+    rel="stylesheet" />
+    <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+    th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
-	<h1>Welcome Mybatis</h1>
-	<table border="1">
+ <nav th:fragment="header"
+        class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span> 
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" th:href="@{/student}">STUDENT</a>
+            </div>
+        </div>
+    </nav>
+    <!--<th:block th:unless="${#lists.isEmpty(students)}">
+	<h1>List Student</h1>  -->
+	<br></br>
+	<br></br> 
+	<div class="row">	
+	<a th:href="@{/addStudent/create}" class="btn btn-success pull-left">
+				<span class="glyphicon glyphicon-plus"></span> Add new student
+			</a>
+			<form class="form-inline pull-right" action="#"
+				th:action="@{/student/search}" method="GET">
+				<div class="form-group">
+					<input type="text" class="form-control" name="name"
+						placeholder="Type student name..." />
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="number" class="form-control" name="min"
+						placeholder="Percentage min..." />
+				</div>
+				<br>
+				<div class="form-group">
+					<input type="number" class="form-control" name="max"
+						placeholder="Percentage max..." />
+				</div>
+				<br></br>
+				<button type="submit" class="btn btn-primary">Search</button>
+				
+			</form>
+			<br>
+			</div>
+			<div class="row">	
+			<th:block th:if="${#lists.isEmpty(students)}">
+			<h3>No student</h3>
+		</th:block>
+		</div>
+	
+	
+		<th:block th:unless="${#lists.isEmpty(students)}">
+		<div class="row">
+	<table border="1" class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th>Id</th>
+				<th>No</th>
 				<th>Name</th>
 				<th>Branch</th>
 				<th>Percentage</th>
 				<th>Phone</th>
 				<th>Email</th>
+				<th>Edit</th>
+				<th>Delete</th>
+				<th>Info</th>		
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="student : ${students}">
-				<td th:utext="${student.id}"></td>
+			<tr th:each="student,start : ${students}">
+				<td th:utext="${start.count}"></td>
 				<td th:utext="${student.name}"></td>
 				<td th:utext="${student.branch}"></td>
 				<td th:utext="${student.percentage}"></td>
 				<td th:utext="${student.phone}"></td>
 				<td th:utext="${student.email}"></td>
+				<td><a th:href="@{/student/{id}/edit(id=${student.id})}"><span
+									class="glyphicon glyphicon-pencil"></span></a></td>
+				<td><a th:href="@{/student/{id}/delete(id=${student.id})}"><span
+									class="glyphicon glyphicon-trash"></span></a></td>
+				<td><a th:href="@{/student/{id}/info(id=${student.id})}"><span
+									class="	glyphicon glyphicon-asterisk"></span></a></td>
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </body>
+
 </html>

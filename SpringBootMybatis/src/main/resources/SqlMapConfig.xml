@@ -5,8 +5,10 @@
 <configuration>
   <typeAliases>
   	<typeAlias type="com.example.entities.Student" alias="Student"/>
+  	<typeAlias type="com.example.entities.Product" alias="Product"/>
   </typeAliases>
   <mappers>
     <mapper resource="com/example/mappersql/StudentMapper.xml"/>
+    <mapper resource="com/example/mappersql/ProductMapper.xml"/>
   </mappers>
 </configuration>

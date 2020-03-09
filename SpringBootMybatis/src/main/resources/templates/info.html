@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head th:replace="index :: head"></head>
+ <body>
+   <nav th:replace="index :: header"></nav>
+   <br></br>
+ <div class="container main-content form">
+        <div class="row1">
+ <h1>Information Student</h1>  
+    <div class="col-md-auto">  
+         <form th:action="@{/student/{id}/info}"
+         th:object="${student}" method="POST" novalidate="novalidate">
+         <br/> 
+         <input type="hidden" th:field="*{id}" />     
+		 
+ 		<!--    <div class="form-group">
+		        <label>Name</label> 
+		        <input type="text" class="form-control"
+		            th:field="*{name}" readonly/> 
+		    </div>  -->
+		    
+		    <div th:object = "${student}" >
+  			<p><b>Id:</b> <span th:utext="*{id}"></span></p>
+			</div>
+			<br>
+		    <div th:object = "${student}" >
+  			<p><b>Name:</b> <span th:utext="*{name}"></span></p>
+			</div>
+         <br/>
+          <div th:object = "${student}" >
+  			<p><b>Branch:</b> <span th:utext="*{branch}"></span></p>
+			</div>   
+         <br/>
+            <div th:object = "${student}" >
+  			<p><b>Percentage:</b> <span th:utext="*{percentage}"></span></p>
+			</div>      
+         <br/>
+            <div th:object = "${student}" >
+  			<p><b>Phone:</b> <span th:utext="*{phone}"></span></p>
+			</div>     
+         <br/>
+            <div th:object = "${student}" >
+  			<p><b>Email:</b> <span th:utext="*{email}"></span></p>
+			</div> 
+			   
+         <br/>
+         <!-- <button type="submit" class="btn btn-primary" th:href="@{/student}">
+        	Back
+         </button> -->
+         <a class="navbar-brand"  th:href="@{/student}"><span
+									class="glyphicon glyphicon-home"></span></a>
+        
+      </form>  
+      </div>
+    </div> 
+    </div>
+</body>
+</html>
