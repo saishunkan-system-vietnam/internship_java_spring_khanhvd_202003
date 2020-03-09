@@ -52,16 +52,18 @@ public class StudentService implements StudentImp{
 		studentDAO.updateStudent(student);
 	}
 
+
+
 	/*
 	 * @Override public List<Student> findByName(String name) { // TODO
 	 * Auto-generated method stub return studentDAO.findByName(name); }
 	 */
 
-	@Override
-	public List<Student> search(String name, Integer min, Integer max) {
-		// TODO Auto-generated method stub
-		return studentDAO.search(name, min, max);
-	}
+	
+	  @Override public List<Student> search(String name, Integer min, Integer max)
+	  { // TODO Auto-generated method stub 
+		  return studentDAO.search(name, min, max); }
+	 
 
 
 }

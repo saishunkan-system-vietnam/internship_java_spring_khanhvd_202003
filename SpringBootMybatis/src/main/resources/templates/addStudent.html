@@ -23,8 +23,8 @@
 		            th:field="*{name}" /> 
 		                <label th:if="${#fields.hasErrors('name')}"  th:class="'error'"></label>
 		    </div>    
-		     <i class="form-control-feedback is-invalid fa fa-times"></i>
-		     <div class="invalid-feedback" th:errors="*{name}">
+		      <i class="form-control-feedback is-invalid fa fa-times"></i> 
+		     <div class="invalid-feedback" style="color:red" th:errors="*{name}">
                     </div>
          <br/>
           <div class="form-group">

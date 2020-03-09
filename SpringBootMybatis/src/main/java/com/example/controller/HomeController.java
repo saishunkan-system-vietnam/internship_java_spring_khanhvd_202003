@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.GetMapping;
@@ -80,14 +81,15 @@ public class HomeController {
 	}
 
 	@GetMapping("/student/search")
-	public String search(@RequestParam("name") String s, @Param("min") Integer min, @Param("max") Integer max,
-			ModelMap model) {
-		if (s.equals("")) {
-			return "redirect:/student";
-		}
-		model.addAttribute("students", studentService.search(s, min, max));
+	public String search(@ModelAttribute("student") Student student, ModelMap model) {
+		model.addAttribute("name", student.getName());
+		model.addAttribute("min", student.getPercentage());
+		model.addAttribute("max", student.getPercentage());
+		List<Student> students = studentService.search(student.getName(), student.getPercentage(), student.getPercentage());
+		model.addAttribute("students", students);
 		return "index";
 	}
+
 
 	@GetMapping("/student/{id}/info")
 	public String info(@PathVariable int id, ModelMap model) {
@@ -95,6 +97,7 @@ public class HomeController {
 		model.addAttribute("student", student);
 		return "info";
 	}
+
 	@PostMapping("/student/{id}/info")
 	public String info(@Valid Student student) {
 		return "redirect:/student";

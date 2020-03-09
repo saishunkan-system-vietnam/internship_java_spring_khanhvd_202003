@@ -49,7 +49,9 @@
          </button> -->
          <a class="navbar-brand"  th:href="@{/student}"><span
 									class="glyphicon glyphicon-home"></span></a>
-        
+									<br>
+        <a th:href="@{/student/{id}/edit(id=${student.id})}"><span
+									class="glyphicon glyphicon-pencil"></span></a>
       </form>  
       </div>
     </div> 

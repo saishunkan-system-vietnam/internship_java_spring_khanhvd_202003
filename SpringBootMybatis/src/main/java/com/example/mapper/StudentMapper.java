@@ -10,19 +10,23 @@ import com.example.entities.Student;
 
 public interface StudentMapper {
 	public List<Student> getAllStudents();
-	//List<Student> findByName(String name);
-	@Select("select * from student where name like '%${name}%'and (percentage >= ${min} and percentage <= ${max})")
+	// List<Student> findByName(String name);
+
 	List<Student> search(@Param("name") String name, @Param("min") Integer min, @Param("max") Integer max);
+
 	public void saveStudent(Student student);
+
 	public void updateStudent(Student student);
+
 	public void deleteStudent(Student student);
+
 	Student findOne(int id);
+
+	public Optional<Student> findStudentById(Long id);
 	/*
 	 * @Select("select * from student where name like '%${name}%'and (percentage >= ${min} and percentage <= ${max})"
 	 * ) List<Student> search(@Param("name") String name, @Param("min") Integer
 	 * min, @Param("max") Integer max);
 	 */
 
-	public Optional<Student> findStudentById(Long id);
-	
 }

@@ -44,10 +44,10 @@
 				<span class="glyphicon glyphicon-plus"></span> Add new student
 			</a>
 			<form class="form-inline pull-right" action="#"
-				th:action="@{/student/search}" method="GET">
-				<div class="form-group">
+				th:action="@{/student/search}" method="GET">	
+				<div class="form-group" >
 					<input type="text" class="form-control" name="name"
-						placeholder="Type student name..." />
+						placeholder="Search by name..." />
 				</div>
 				<br>
 				<div class="form-group">
@@ -98,14 +98,16 @@
 				<td th:utext="${student.email}"></td>
 				<td><a th:href="@{/student/{id}/edit(id=${student.id})}"><span
 									class="glyphicon glyphicon-pencil"></span></a></td>
-				<td><a th:href="@{/student/{id}/delete(id=${student.id})}"><span
+				<td><a th:href="@{/student/{id}/delete(id=${student.id})}" th:onclick="return confirm('Are you sure to delete?')"><span
 									class="glyphicon glyphicon-trash"></span></a></td>
-				<td><a th:href="@{/student/{id}/info(id=${student.id})}"><span
+				<td><a th:href="@{/student/{id}/info(id=${student.id})}" ><span
 									class="	glyphicon glyphicon-asterisk"></span></a></td>
 			</tr>
 		</tbody>
 	</table>
 	</div>
+	</div>
 </body>
+
 
 </html>
