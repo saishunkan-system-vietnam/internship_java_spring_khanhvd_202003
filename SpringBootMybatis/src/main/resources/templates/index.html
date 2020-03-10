@@ -4,109 +4,139 @@
 <meta charset="UTF-8">
 <title>Welcome Spring Boot</title>
 <link
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-    rel="stylesheet" />
-    <link href="../static/css/style.css" th:href="@{/css/style.css}"
-    rel="stylesheet" />
-    <script
-    src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
-    th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link href="../static/css/style.css" th:href="@{/css/style.css}"
+	rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+	th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-    th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 
 </head>
 <body>
- <nav th:fragment="header"
-        class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                    aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span> 
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span> 
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/student}">STUDENT</a>
-            </div>
-        </div>
-    </nav>
-    <!--<th:block th:unless="${#lists.isEmpty(students)}">
+	<nav th:fragment="header"
+		class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" th:href="@{/student}">STUDENT</a>
+			</div>
+		</div>
+	</nav>
+	<!--<th:block th:unless="${#lists.isEmpty(students)}">
 	<h1>List Student</h1>  -->
 	<br></br>
-	<br></br> 
-	<div class="row">	
-	<a th:href="@{/addStudent/create}" class="btn btn-success pull-left">
-				<span class="glyphicon glyphicon-plus"></span> Add new student
-			</a>
-			<form class="form-inline pull-right" action="#"
-				th:action="@{/student/search}" method="GET">	
-				<div class="form-group" >
-					<input type="text" class="form-control" name="name"
-						placeholder="Search by name..." />
-				</div>
-				<br>
-				<div class="form-group">
-					<input type="number" class="form-control" name="min"
-						placeholder="Percentage min..." />
-				</div>
-				<br>
-				<div class="form-group">
-					<input type="number" class="form-control" name="max"
-						placeholder="Percentage max..." />
-				</div>
-				<br></br>
-				<button type="submit" class="btn btn-primary">Search</button>
-				
-			</form>
-			<br>
+	<br></br>
+	<div class="row">
+		<a th:href="@{/addStudent/create}" class="btn btn-success pull-left">
+			<span class="glyphicon glyphicon-plus"></span> Add new student
+		</a>
+		<form class="form-inline pull-right" action="#"
+			th:action="@{/student/search}" method="POST"
+			th:object="${studentDto}">
+			<div class="form-group">
+				<input type="text" class="form-control" th:field="*{name}"
+					placeholder="Search by name..." />
 			</div>
-			<div class="row">	
-			<th:block th:if="${#lists.isEmpty(students)}">
+			<br>
+			<div class="form-group">
+				<input type="number" class="form-control" th:field="*{min}"
+					placeholder="Percentage min..." />
+			</div>
+			<br>
+			<div class="form-group">
+				<input type="number" class="form-control" th:field="*{max}"
+					placeholder="Percentage max..." />
+			</div>
+			<br></br>
+			<button type="submit" class="btn btn-primary">Search</button>
+
+		</form>
+		<br>
+	</div>
+	<div class="row">
+		<th:block th:if="${#lists.isEmpty(students.pageList)}">
 			<h3>No student</h3>
 		</th:block>
-		</div>
-	
-	
-		<th:block th:unless="${#lists.isEmpty(students)}">
+	</div>
+
+
+	<th:block th:unless="${#lists.isEmpty(students.pageList)}">
 		<div class="row">
-	<table border="1" class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>No</th>
-				<th>Name</th>
-				<th>Branch</th>
-				<th>Percentage</th>
-				<th>Phone</th>
-				<th>Email</th>
-				<th>Edit</th>
-				<th>Delete</th>
-				<th>Info</th>		
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="student,start : ${students}">
-				<td th:utext="${start.count}"></td>
-				<td th:utext="${student.name}"></td>
-				<td th:utext="${student.branch}"></td>
-				<td th:utext="${student.percentage}"></td>
-				<td th:utext="${student.phone}"></td>
-				<td th:utext="${student.email}"></td>
-				<td><a th:href="@{/student/{id}/edit(id=${student.id})}"><span
-									class="glyphicon glyphicon-pencil"></span></a></td>
-				<td><a th:href="@{/student/{id}/delete(id=${student.id})}" th:onclick="return confirm('Are you sure to delete?')"><span
-									class="glyphicon glyphicon-trash"></span></a></td>
-				<td><a th:href="@{/student/{id}/info(id=${student.id})}" ><span
-									class="	glyphicon glyphicon-asterisk"></span></a></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-	</div>
+			<table border="1" class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>Name</th>
+						<th>Branch</th>
+						<th>Percentage</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>Info</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student,start : ${students.pageList}">
+						<td th:utext="${start.count}"></td>
+						<td th:utext="${student.name}"></td>
+						<td th:utext="${student.branch}"></td>
+						<td th:utext="${student.percentage}"></td>
+						<td th:utext="${student.phone}"></td>
+						<td th:utext="${student.email}"></td>
+						<td><a th:href="@{/student/{id}/edit(id=${student.id})}"><span
+								class="glyphicon glyphicon-pencil"></span></a></td>
+						<td><a th:href="@{/student/{id}/delete(id=${student.id})}"
+							th:onclick="return confirm('Are you sure to delete?')"><span
+								class="glyphicon glyphicon-trash"></span></a></td>
+						<td><a th:href="@{/student/{id}/info(id=${student.id})}"><span
+								class="	glyphicon glyphicon-asterisk"></span></a></td>
+					</tr>
+				</tbody>
+			</table>
+		<ul class="pagination">
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+				<a class="page-link" th:href="@{/student}">First</a>
+			</li>
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+				<a class="page-link" aria-label="Previous"
+				th:href="@{|${baseUrl}${currentIndex - 1}|}"
+				title='Go to previous page'><span aria-hidden="true">«</span>
+					<span class="sr-only">Previous</span></a>
+			</li>
+			<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+				th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+				<a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
+					th:text='${item}'>1</span>
+			</a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+				<a class="page-link" aria-label="Next"
+				th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
+					aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+				<a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+			</li>
+		</ul>
+		</div>
+		
 </body>
 
 

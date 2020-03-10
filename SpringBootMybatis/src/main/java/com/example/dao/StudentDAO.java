@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.daoimp.StudentImp;
+import com.example.dto.StudentDTO;
 import com.example.entities.Student;
 import com.example.mapper.StudentMapper;
 
@@ -60,7 +61,7 @@ public class StudentDAO implements StudentImp {
 	 */
 
 	@Override
-	public List<Student> search(String name, Integer min, Integer max) { // TODO Auto-generated method stub
+	public List<StudentDTO> search(String name, Integer min, Integer max) { // TODO Auto-generated method stub
 		return studentMapper.search(name, min, max);
 	}
 

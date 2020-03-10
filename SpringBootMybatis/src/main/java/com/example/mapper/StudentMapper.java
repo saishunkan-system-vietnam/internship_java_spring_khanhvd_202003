@@ -6,13 +6,14 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.example.dto.StudentDTO;
 import com.example.entities.Student;
 
 public interface StudentMapper {
 	public List<Student> getAllStudents();
 	// List<Student> findByName(String name);
 
-	List<Student> search(@Param("name") String name, @Param("min") Integer min, @Param("max") Integer max);
+	List<StudentDTO> search(@Param("name") String name, @Param("min") Integer min, @Param("max") Integer max);
 
 	public void saveStudent(Student student);
 

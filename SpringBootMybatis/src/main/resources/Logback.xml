@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+<!--     <contextName>logback</contextName> -->
+    <property name="log.path" value="../as300_web_logs/service_monitor/service_monitor" />
+    <property name="log.level" value="info" />
+         <!--Output to console-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+       <!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>-->
+        <encoder>
+                 <!--Formatted output: %d for date, %thread for thread name, %-5level: level for 5 characters width from left. %msg: log message, %n is a newline --> 
+            <!-- <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern> -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+         <!--Output to file-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+         <!-- Create a log file by date and file size, one file per day, if new files are created over 20M -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>20MB</maxFileSize>
+			 <maxHistory>7</maxHistory> <!-- Keep up to 7 days of log files -->
+			<totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+         <!-- name is the package name of the print sql information, that is, the package will be printed under sql -->
+    <logger name="com.focus.application" level="debug" />
+                 <!-- mybatis log printing -->
+    <logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="java.sql" level="DEBUG" />
+ 
+    <root level="info,debug">
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+</configuration>

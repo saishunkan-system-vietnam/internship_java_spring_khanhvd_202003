@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.StudentDAO;
 import com.example.daoimp.StudentImp;
+import com.example.dto.StudentDTO;
 import com.example.entities.Student;
 
 @Service
@@ -60,7 +61,7 @@ public class StudentService implements StudentImp{
 	 */
 
 	
-	  @Override public List<Student> search(String name, Integer min, Integer max)
+	  @Override public List<StudentDTO> search(String name, Integer min, Integer max)
 	  { // TODO Auto-generated method stub 
 		  return studentDAO.search(name, min, max); }
 	 
