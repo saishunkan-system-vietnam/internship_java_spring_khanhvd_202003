@@ -12,11 +12,11 @@ import com.example.dto.StudentDTO;
 import com.example.entities.Student;
 
 @Service
-public class StudentService implements StudentImp{
+public class StudentService implements StudentImp {
 
 	@Autowired
 	StudentDAO studentDAO;
-	
+
 	@Override
 	public List<Student> getAllListStudent() {
 		// TODO Auto-generated method stub
@@ -53,18 +53,19 @@ public class StudentService implements StudentImp{
 		studentDAO.updateStudent(student);
 	}
 
-
-
 	/*
 	 * @Override public List<Student> findByName(String name) { // TODO
 	 * Auto-generated method stub return studentDAO.findByName(name); }
 	 */
 
-	
-	  @Override public List<StudentDTO> search(String name, Integer min, Integer max)
-	  { // TODO Auto-generated method stub 
-		  return studentDAO.search(name, min, max); }
-	 
+	@Override
+	public List<Student> search(StudentDTO student) {
+		return studentDAO.search(student);
+	}
 
+	@Override
+	public int findCountStudents(StudentDTO student) {
+		return studentDAO.findCountStudents(student) ;
+	}
 
 }

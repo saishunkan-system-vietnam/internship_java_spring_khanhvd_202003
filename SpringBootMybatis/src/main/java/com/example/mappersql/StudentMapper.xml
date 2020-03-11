@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.StudentMapper">
-	<insert id="saveStudent" parameterType="Student" >
-        INSERT INTO student ( name, branch, percentage, phone, email ) VALUES ( #{name}, #{branch}, #{percentage}, #{phone}, #{email});
-    </insert>
-    
-    <update id="updateStudent" parameterType="Student">
-        UPDATE student SET email = #{email}, name = #{name}, branch = #{branch}, percentage = #{percentage}, phone = #{phone} WHERE id = #{id};
-    </update>
-    
-    <delete id="deleteStudent" parameterType="int">
-        DELETE from student WHERE id = #{id};
-    </delete>
-    
+	<insert id="saveStudent" parameterType="Student">
+		INSERT INTO student (
+		name, branch, percentage, phone, email ) VALUES (
+		#{name}, #{branch},
+		#{percentage}, #{phone}, #{email});
+	</insert>
+
+	<update id="updateStudent" parameterType="Student">
+		UPDATE student SET
+		email = #{email}, name = #{name}, branch = #{branch},
+		percentage =
+		#{percentage}, phone = #{phone} WHERE id = #{id};
+	</update>
+
+	<delete id="deleteStudent" parameterType="int">
+		DELETE from student
+		WHERE id = #{id};
+	</delete>
+
 	<select id="getAllStudents" resultMap="result">
 		select * from student
 	</select>
-	
+
 	<select id="findOne" parameterType="int" resultMap="result">
-		select * from student where id = #{id};
+		select * from
+		student where id = #{id};
 	</select>
-	
+
 	<select id="search" resultMap="result">
-		select * from student 
-		where 1=1 
+		select * from student
+		where 1=1
 		<if test="name != null">
 			AND name like '%${name}%'
 		</if>
-		
+
 		<if test="min != null">
 			AND percentage >= #{min}
 		</if>
-		
+
+		<if test="max != null">
+			AND percentage <![CDATA[ <= ]]>
+			#{max}
+		</if>
+
+		limit #{pageSize} offset #{offset}
+	</select>
+
+	<select id="findCountStudents" resultType="int">
+	
+		select count(*) from student where 1=1
+		<if test="name != null">
+			AND name like '%${name}%'
+		</if>
+
+		<if test="min != null">
+			AND percentage >= #{min}
+		</if>
+
 		<if test="max != null">
 			AND percentage <![CDATA[ <= ]]> #{max}
 		</if>
-	</select>
 	
+	</select>
+
 	<resultMap type="Student" id="result">
-    	<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="branch" column="branch"/>
-		<result property="percentage" column="percentage"/>
-		<result property="phone" column="phone"/>
-		<result property="email" column="email"/>
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="branch" column="branch" />
+		<result property="percentage" column="percentage" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
 	</resultMap>
 </mapper>

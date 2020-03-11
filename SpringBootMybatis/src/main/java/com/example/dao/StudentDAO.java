@@ -61,10 +61,13 @@ public class StudentDAO implements StudentImp {
 	 */
 
 	@Override
-	public List<StudentDTO> search(String name, Integer min, Integer max) { // TODO Auto-generated method stub
-		return studentMapper.search(name, min, max);
+	public List<Student> search(StudentDTO student) { // TODO Auto-generated method stub
+		return studentMapper.search(student);
 	}
 
-
+	@Override
+	public int findCountStudents(StudentDTO student) {
+		return studentMapper.findCountStudents(student);
 	}
-	
+
+}
